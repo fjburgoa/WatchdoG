@@ -1,0 +1,38 @@
+Remove unnecesary services:
+https://raspberrypi.stackexchange.com/questions/104499/which-services-on-the-pi-are-mandatory-and-optional
+
+Auto-login
+https://forums.raspberrypi.com/viewtopic.php?t=135261
+
+start verbose:
+https://raspberrypi.stackexchange.com/questions/77655/how-to-enable-and-see-the-bootup-messages-of-the-system-console
+
+remove packages - free space
+https://www.raspberrypi-spy.co.uk/2018/03/free-space-raspberry-pi-sd-card/
+
+disable bluetooth
+https://peppe8o.com/4-tricks-to-improve-raspberry-pi-performance-and-power-consuption/
+
+Wiring Pi
+clone: de https://github.com/WiringPi/WiringPi.git
+http://wiringpi.com/download-and-install/
+./build
+
+
+Start at the beginning
+https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
+(La 2a) --> Bashrc es la que ha funcionado 
+sudo nano /home/pi/.bashrc
+
+https://learn.sparkfun.com/tutorials/how-to-run-a-raspberry-pi-program-on-startup#method-3-systemd
+
+sudo nano /lib/systemd/system/WatchdoG.service
+systemctl --type=service
+sudo systemctl daemon-reload
+sudo systemctl enable myservice
+sudo systemctl start/stop myservice
+sudo systemctl disable isc-dhcp-server.service
+sudo systemctl disable 
+
+
+
