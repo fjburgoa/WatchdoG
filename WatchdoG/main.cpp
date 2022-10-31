@@ -39,24 +39,21 @@ int main()
 	//pinMode(PIN1, OUTPUT);		  // Configure as input
 	pinMode(PIN1, PWM_OUTPUT);		  // Configure as input
 
-  cout << "Starting Countdown\n\n";
-  signal(SIGALRM, &sigalarm_handler); //ojo es SIGALRM no SIGALARM
-  ualarm(100000,100000);  //periodo del timer cada 100useg
+    cout << "Starting Countdown\n\n";
+    signal(SIGALRM, &sigalarm_handler); //ojo es SIGALRM no SIGALARM
+    ualarm(100000,100000);  //periodo del timer cada 100useg
 
-  if (fork() == 0) {
+    if (fork() == 0) {
 	  // Child process will return 0 from fork()
 	  printf("I'm the child process.\n");
 	  status = system("/home/pi/dump1090/dump1090 --interactive");
 	  exit(0);
-  }
-  else {
+    }
+    else 
+	{
 	  // Parent process will return a non-zero value from fork()
 	  printf("I'm the parent.\n");
-  }
-
-
-
-   // sys
+    }
 
 
 	while (1)
