@@ -19,7 +19,7 @@ LFLAGS = -L/usr/local/lib
 
 # define any libraries to link into executable:
 #   if I want to link in libraries (libx.so or libx.a) I use the -llibna
-LIBS = -lwiringPi
+LIBS = -lwiringPi -lpthread
 
 # define the CPP object files 
 #

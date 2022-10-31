@@ -13,24 +13,21 @@ using namespace std;		// No need to keep using “std”
 
 unsigned int  i = 0;
 
-int status;
+ 
+
+//use:
+//digitalWrite(PINx, ON);
+//digitalWrite(PINx, OFF); 
+//digitalRead(PINx);
 
 void sigalarm_handler (int sig)
 {
-
-	/*
-	if (i%2==0)
-		digitalWrite(PIN1, ON);
-	else 
-		digitalWrite(PIN1, OFF);
-  */
-  pwmWrite(PIN1, i);
-  i+=40;
-  if (i>1023)
-  	i=0;
-
-  //cout << "#" << i << "\n";
-		
+   pwmWrite(PIN1, i);
+   i+=40;
+   if (i > 1023)
+   {
+	   i = 0;
+   }
 }
 
 int main()
@@ -43,40 +40,25 @@ int main()
     signal(SIGALRM, &sigalarm_handler); //ojo es SIGALRM no SIGALARM
     ualarm(100000,100000);  //periodo del timer cada 100useg
 
-    if (fork() == 0) {
-	  // Child process will return 0 from fork()
-	  printf("I'm the child process.\n");
-	  status = system("/home/pi/dump1090/dump1090 --interactive");
-	  exit(0);
+    if (fork() == 0) 
+	{
+	   // Child process will return 0 from fork()
+	   printf("Child process will attempt to start dump1090.\n");
+	   //status = system("/home/pi/dump1090/dump1090 --interactive");
+	   int status = system("/home/pi/dump1090/dump1090");
+	   exit(0);
     }
     else 
 	{
-	  // Parent process will return a non-zero value from fork()
-	  printf("I'm the parent.\n");
+	   //Start surveillance of pin
+	   printf("Starting Battery Surveillance.\n");
     }
-
 
 	while (1)
 	{
 		// Button is pressed if digitalRead returns 0
-		/*
-		if (digitalRead(PIN0) == 1)
-			system("sudo shutdown -P now")	
-
-		if (digitalRead(PIN0) == 0)
-			digitalWrite(PIN1, OFF);
-   	*/ 
-   	
 		if (digitalRead(PIN0) == 1)
 			system("sudo shutdown -P now");
-
-		
-		//if (i>40)
-		//{
-		    //system("sudo shutdown -P now")		;
-		//}
- 
-
 
 	}
 	return 0;
